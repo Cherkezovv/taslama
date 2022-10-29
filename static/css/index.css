@@ -1,0 +1,189 @@
+
+.menu-btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+}
+
+.menu-btn__burger {
+    width: 20px;
+    height: 1px;
+    background: #000;
+    border-radius: 5px;
+    box-shadow: 0 3px 5px rgba(255, 101, 47, .2);
+    transition: all .5s ease-in-out;
+}
+
+.menu-btn__burger::before,
+.menu-btn__burger::after {
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: #000;
+    border-radius: 5px;
+    box-shadow: 0 3px 5px rgba(255, 101, 47, .2);
+    transition: all .5s ease-in-out;
+}
+
+.menu-btn__burger::before {
+    transform: translateY(-6px);
+}
+
+.menu-btn__burger::after {
+    transform: translateY(6px);
+}
+
+.menu-btn.open .menu-btn__burger {
+    /* transform: translateX(-50px); */
+    /* visibility: hidden; */
+    animation: animate 1.5s;
+    background: transparent;
+    box-shadow: none;
+}
+
+.menu-btn.open .menu-btn__burger::before {
+    transform: rotate(45deg);
+}
+
+.menu-btn.open .menu-btn__burger::after {
+    transform: rotate(-45deg);
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    60% {
+        transform: rotate(360deg);
+    }
+}
+
+.mini-menu {
+    width: 100%;
+    /* background: #fff; */
+    position: absolute;
+    top: -300px;
+    transition: all .5s ease-in-out;
+}
+
+.menu-left {
+    top: 55px;
+    transition: all .5s ease-in-out;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #EDF4FF;
+    color: black;
+}
+
+.active {
+    color: grey;
+    border-bottom: 3px solid #22C55E;
+}
+
+.pulse {
+    z-index: 10;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: #3B82F6;
+    position: fixed;
+    opacity: 1;
+}
+
+.pulse::before,
+.pulse::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    z-index: -1;
+    background: #3B82F6;
+}
+
+.pulse::before {
+    animation: pulse 2s ease-out infinite;
+}
+
+.pulse::after {
+    animation: pulse 2s 1s ease-out infinite;
+}
+
+@keyframes pulse {
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+.object {
+    animation: object 3s linear infinite;
+}
+
+.object1 {
+    animation: object1 3s linear infinite;
+}
+
+@keyframes object {
+    50% {
+        right: 10px;
+        top: 50px;
+    }
+}
+
+@keyframes object1 {
+    50% {
+        top: 280px;
+        right: 620px;
+    }
+}
+
+.p-4 {
+    padding: 0 !important;
+}
+
+.slick-next:before,
+.slick-prev:before {
+    color: #EDF4FF;
+    font-size: 30px !important;
+}
+
+.slick-prev {
+    left: 40px !important;
+    z-index: 2 !important;
+}
+
+.slick-next {
+    right: 40px !important;
+}
+
+.p-4 {
+    padding: 0 !important;
+}
+
+.slick-next:before,
+.slick-prev:before {
+    color: #EDF4FF;
+}
+
+.slick-prev {
+    left: 40px !important;
+    z-index: 2 !important;
+}
+
+.slick-next {
+    right: 40px !important;
+}

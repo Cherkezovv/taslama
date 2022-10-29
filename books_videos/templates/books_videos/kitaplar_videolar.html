@@ -1,0 +1,94 @@
+{% extends "books_videos/base.html" %}
+{% load static %}
+<title>{% block title %}{{ ders.ders_name }}{% endblock title %}</title>
+
+
+{% block content %}
+
+	<div class="bg-violet-50 w-full md:px-0 px-3 py-2 md:pb-96 pb-[800px]">
+        <p class="text-2xl py-6 text-center">{{ ders.ders_name }}</p>
+        <div class="mb-10 text-sm font-medium text-center flex justify-center text-gray-500 border-b border-gray-200">
+            <ul class="flex flex-wrap -mb-px">
+                <li onclick="openCity(event,'kitaplar')" class="tablinks cursor-pointer active">
+                    <a href="#"
+                        class="inline-block p-4 rounded-t-lg border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 text-lg">Kitaplar</a>
+                </li>
+                <li onclick="openCity(event,'wideolar')" class="tablinks cursor-pointer md:mx-4 mx-2">
+                    <a href="#"
+                        class="text-lg inline-block p-4 rounded-t-lg border-transparent hover:text-gray-600 hover:border-gray-300">Wideolar</a>
+                </li>
+                <li onclick="openCity(event,'bellikler')" class="tablinks cursor-pointer">
+                    <a href="#"
+                        class="text-lg inline-block p-4 rounded-t-lg border-transparent hover:text-gray-600 hover:border-gray-300">Bellikler</a>
+                </li>
+            </ul>
+        </div>
+        <div id="kitaplar" class="pb-96 tabcontent container mx-auto">
+            <div class="grid lg:grid-cols-3 md:grid-cols-2 md:gap-5 gap-2">
+                {% for kitap in kitaplar %}
+					<div class="w-full">
+						<a target="_blank" href="{{ kitap.file.url }}" class="text-sm text-gray-400">
+							<img class="w-full md:h-64 h-52" src="{% static 'img/pdf.png' %}"/>
+							<div class='flex justify-between mt-1 px-2 text-sm text-black'>
+								<p class="py-1 text-sm">{{ kitap.name }}</p>
+								<p class="py-1 text-sm">{{ kitap.date_added }}</p>
+							</div>
+						</a>
+					</div>
+				{% empty %}
+					<p>Kitap yok</p>
+				{% endfor %}
+            </div>
+        </div>
+        <div id="wideolar" class="pb-96 tabcontent hidden container mx-auto">
+            <div class="grid lg:grid-cols-3 sm:grid-cols-2 md:gap-5 gap-2">
+                {% for video in videolar %}
+					<div>
+						<video class="w-full" controls>
+							<source src="{{ video.file.url }}"
+								type="video/mp4">
+							<source src="movie.ogg" type="video/ogg">					
+						</video>
+						<div class="flex justify-between mt-1 px-2 text-sm text-black">
+							<p>{{ video.name }}</p>
+							<p>{{ video.date_added }}</p>
+						</div>
+					</div>
+				{% empty %}
+					<p>Video yok</p>
+				{% endfor %}
+            </div>
+        </div>
+        <div id="bellikler" class="pb-96 tabcontent hidden container mx-auto">
+            <div class="grid md:grid-cols-2 md:gap-5 gap-2">
+				{% for bellik in bellikler %}
+					<div class="overflow-y-auto w-full flex flex-col justify-between lg:h-36 h-auto bg-white rounded-md p-3">
+						<div class="border-b flex justify-between items-center">
+							<p class="text-lg">{{ bellik.tema_name }}</p>
+							<p class="text-gray-500 text-sm">{{ bellik.date_added }}</p>
+						</div>
+						<p class="pt-1">{{ bellik.tema_text|safe }}</p>
+					</div>
+				{% empty %}
+					<p>Bellik yok</p>
+				{% endfor %}
+            </div>
+            <div class="w-full flex justify-center">
+                <form  action="{% url 'books_videos:kitaplar_videolar' ders.id %}" method="post">
+                    {% csrf_token %}
+
+						<div class="w-full flex justify-center flex-col">
+							{{ form.tema_name }}
+							{{ form.media }} {{ form.tema_text }}
+						</div>
+
+                    <button
+                       name="submit" class="text-lg bg-white float-right w-fit md:px-4 md:py-1 px-2 py-0.5 cursor-pointer mt-1 rounded-md hover:shadow-none shadow-lg">
+                        Ugrat</button>
+				</form>
+            </div>
+        </div>
+	</div>
+
+
+{% endblock content %}

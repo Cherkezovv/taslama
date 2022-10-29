@@ -1,0 +1,114 @@
+{% load static %}
+<html>
+<head>
+	
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slick-theme.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slick-theme.min.css' %}">
+	<title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+		{% if user.is_authenticated %}
+		<div class="w-full h-14 bg-white text-black shadow-xl z-20" id="myHeader">
+            <div class="md:px-0 px-4 h-full container mx-auto flex items-center justify-between">
+                <p id="logo" class="text-2xl font-bold text-green-500"><a href="{% url 'books_videos:index' %}">SanlyBilim</a></p>
+                <ul class="md:flex items-center hidden" id="menu">
+                    {% with request.resolver_match.url_name as url_name %}
+                        <li class="{% if url_name == 'index' %}active{% endif %} py-3.5 lg:ml-4 ml-2 hover:text-gray-300 transition all duration-300"><a class="py-3.5 nav-link" href="{% url 'books_videos:index' %}">Baş sahypa</a>
+                        </li>
+                                            
+                        
+                        <li class="{% if url_name == 'habarlar' %}active{% endif %} lg:ml-4 ml-2 py-3.5 hover:text-gray-300 transition all duration-300"><a class="py-3.5 nav-link" href="{% url 'gyzykly:habarlar' %}">Habarlar</a>
+                        </li>
+                        
+                        <li class="{% if url_name == 'gyzykly_kitaplar' %}active{% endif %} lg:ml-4 ml-2 py-3.5 hover:text-gray-300 transition all duration-300"><a class="py-3.5 nav-link" href="{% url 'gyzykly:gyzykly_kitaplar' %}">Gyzykly
+                                kitaplar</a></li>
+                        <li class="{% if url_name == 'gyzykly_videolar' %}active{% endif %} lg:ml-4 ml-2 py-3.5 hover:text-gray-300 transition all duration-300"><a class="py-3.5 nav-link"
+                                href="{% url 'gyzykly:gyzykly_videolar' %}">Gyzykly
+                                wideolar</a></li>
+                        <li class="{% if url_name == 'sorag_jogap' %}active{% endif %} lg:ml-4 ml-2 py-3.5 hover:text-gray-300 transition all duration-300"><a class="py-3.5 nav-link"
+                                href="{% url 'chat:sorag_jogap' %}">Sorag-Jogap</a></li>
+                        <li class="{% if url_name == 'shahsy_otag' %}active{% endif %} lg:ml-4 ml-2 py-3.5 hover:text-gray-300 transition all duration-300">
+                        <a class="py-3.5 nav-link" href="{% url 'ulanyjylar:shahsy_otag' %}">
+                            <svg class="h-5 float-left" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            {{ user.username }}
+                        </a>
+                        </li>
+                        <li class="{% if url_name == 'logoutt' %}active{% endif %} lg:ml-4 ml-2 bg-green-500 text-white py-1 px-2 rounded-md hover:text-gray-300 transition all duration-300 cursor-pointer"><a href="{% url 'ulanyjylar:logoutt' %}">Log out</a></li>
+                    {% endwith %}
+                </ul>
+                <div class="md:hidden flex menu-btn">
+                    <div class="menu-btn__burger"></div>
+                </div>
+            </div>
+            <div class="md:px-0 z-10 px-4 mini-menu bg-white shadow-lg">
+                <ul class="container mx-auto border-b md:hidden flex flex-col" id="miniMenu">
+                    {% with request.resolver_match.url_name as url_name %}
+                        <li class="{% if url_name == 'index' %}active{% endif %} mb-4 hover:text-gray-300 transition all duration-300"><a href="{% url 'books_videos:index' %}">Baş
+                                sahypa</a></li>
+                        <li class="{% if url_name == 'habarlar' %}active{% endif %} mb-4 hover:text-gray-300 transition all duration-300"><a href="{% url 'gyzykly:habarlar' %}">Habarlar</a></li>
+                        <li class="{% if url_name == 'gyzykly_kitaplar' %}active{% endif %} mb-4 hover:text-gray-300 transition all duration-300"><a
+                                href="{% url 'gyzykly:gyzykly_kitaplar' %}">Gyzykly kitaplar</a></li>
+                        <li class="{% if url_name == 'gyzykly_videolar' %}active{% endif %} mb-4 hover:text-gray-300 transition all duration-300"><a
+                                href="{% url 'gyzykly:gyzykly_videolar' %}">Gyzykly
+                                wideolar</a></li>
+                        <li class="{% if url_name == 'sorag_jogap' %}active{% endif %} mb-4 hover:text-gray-300 transition all duration-300"><a
+                                href="{% url 'chat:sorag_jogap' %}">Sorag-Jogap</a>
+                        </li>
+                        <li class="{% if url_name == 'shahsy_otag' %}active{% endif %} mb-4 hover:text-gray-300 transition all duration-300">
+                            <a href="{% url 'ulanyjylar:shahsy_otag' %}" clas="py-3.5">
+                                <svg class="h-5 float-left" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            
+                            {{ user.username }}
+                            </a>
+                        </li>
+                        <li class="mb-4 text-center bg-green-500 text-white py-1 px-2 rounded-md hover:text-gray-300 transition all duration-300 cursor-pointer"><a href="{% url 'ulanyjylar:logoutt' %}">Log out</a></li>
+                    {% endwith %}
+                </ul>
+            </div>
+        </div>
+		{% endif %}
+    {% block content %}
+	{% endblock content %}
+    {% if request.path == '/chat/adminehabar/' %}
+        <p></p> 
+    {% elif request.path == '/ulanyjylar/login/' %}
+        <p></p>
+
+    {% elif request.path == '/ulanyjylar/register/' %} 
+        <p></p>
+
+    {% elif request.path == '/chat/soragjogap/' %}
+        <p></p>
+
+    {% else %}
+        <div class="pulse flex justify-center items-center md:mr-10 md:mb-10 mr-7 mb-7">
+            <a href="{% url 'chat:adminehabar' %}">
+                <img src="{% static 'img/send.png' %}" class="w-6 h-6 text-white" alt="" />
+            </a>
+        </div>
+    {% endif %}
+
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/slick.min.js' %}"></script>
+    <script>
+        $('.slider').slick({
+            autoplay: true,
+            speed: 400,
+            autoplaySpeed: 2000,
+        });
+    </script>
+    <script type="text/javascript" src="{% static 'js/tailwindcss.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

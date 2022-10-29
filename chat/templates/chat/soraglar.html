@@ -1,0 +1,43 @@
+{% extends 'books_videos/base.html' %}
+
+{% block title %}Sorag Jogap{% endblock title %}
+
+{% block content %}
+
+<div class="w-full bg-violet-50 md:pt-20 pt-10 md:pb-96 md:px-0 px-3 py-2">
+	<div class="container mx-auto">
+		<div class="overflow-y-auto h-1/2 grid md:grid-cols-2 md:gap-5 gap-2">
+			{% for okuwcy in okuwcydata %}
+				{% for sorag in soraglar %}
+					{% if okuwcy.okuwcy_etrap == sorag.owner.okuwcy_etrap and okuwcy.okuwcy_mekdep == sorag.owner.okuwcy_mekdep and okuwcy.okuwcy_synp == sorag.owner.okuwcy_synp %}
+
+						<div class="w-full flex flex-col justify-between lg:h-36 h-auto bg-white rounded-md p-3">
+							<div class="border-b flex justify-between items-center">
+								<p class="md:text-lg text-md">{{ sorag.owner.okuwcy_ady }} {{ sorag.owner.okuwcy_familya }}</p>
+								<p class="text-gray-500 md:text-sm text-xs">{{ sorag.date_added }}</p>
+							</div>
+							<p class="pt-1">{{ sorag.sorag }}</p>
+						</div>
+					{% endif %}
+				{% empty %}
+					<p>Sorag jogap yok</p>
+				{% endfor %}
+			{% endfor %}
+		</div>
+		<div class="fixed md:bottom-0 bottom-2 left-2 right-2 w-[100%-10px] flex justify-center mt-4">
+			<form class="md:w-2/3 w-full" action="{% url 'chat:sorag_jogap' %}" method="post">
+				{% csrf_token %}
+
+					<div class="w-full flex justify-center flex-col">
+						{{ form.sorag }}
+					</div>
+
+				<button
+				name="submit" class="text-lg bg-white float-right w-fit md:px-4 md:py-1 px-4 py-1 cursor-pointer mt-1 rounded-md shadow-lg">
+					Ugrat</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

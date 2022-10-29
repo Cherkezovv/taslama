@@ -1,0 +1,38 @@
+{% extends 'books_videos/base.html' %}
+
+{% block title %}Gyzykly wideolar{% endblock title %}
+
+{% block content %}
+	<div class="bg-violet-50 md:pb-96 pb-[800px]">
+		<div class="w-full container mx-auto py-6 px-5 md:px-0">
+			<p class="text-2xl py-6">Gyzykly wideolar</p>
+			<div class="grid lg:grid-cols-3 sm:grid-cols-2 md:gap-5 gap-2">
+				{% for gyzykly_video in gyzykly_videolar %}
+					<div>
+						<video class="w-full" controls>
+							<source src="{{ gyzykly_video.gyzykly_video.url }}"
+								type="video/mp4">
+							<source src="movie.ogg" type="video/ogg">					
+						</video>
+						<div class="flex items-center justify-between py-1 md:px-2">
+							<p class="text-lg text-black">{{ gyzykly_video.gyzykly_video_name }}</p>
+							<p class="text-sm text-black">{{ gyzykly_video.date_added }}</p>
+						</div>
+					</div>
+				{% empty %}
+					<p>Video yok</p>
+				{% endfor %}
+			</div>
+			<div class="md:mt-4 mt-2 w-fit flex justify-center">
+					{% if gyzykly_videolar.has_previous %}
+						<a class="bg-green-500 hover:bg-gray-300 rounded-l-md text-white border-r-2 px-2 py-2" href="?page={{ habarlar.previous_page_number }}">yza</a>
+					{% endif %}
+						<a class="bg-green-500 text-white px-2 py-2">{{ gyzykly_videolar }}</a>
+					{% if gyzykly_videolar.has_next %}
+						<a class="bg-green-500 hover:bg-gray-300 text-white rounded-r-md border-l-2 px-2 py-2" href="?page={{ habarlar.next_page_number }}">one</a>
+					{% endif %}
+				</div>
+		</div>
+	</div>
+	
+{% endblock content %}

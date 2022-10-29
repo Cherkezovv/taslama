@@ -1,0 +1,136 @@
+{% extends "books_videos/base.html" %}
+{% load static %}
+
+{% block title %}Bas sahypa{% endblock title %}
+
+{% block content %}
+
+
+	
+		
+		<div>
+			<ul class="slider lg:h-3/4 h-52 md:h-1/2">
+				{% for surat in suratlar %}
+					<li class="cursor-pointer"><img class="w-screen h-full cover" src="{{ surat.image.url }}"></li>
+				{% endfor %}
+			</ul>
+		</div>
+
+
+<div class="bg-violet-50 border-b w-full md:px-0 px-3 md:h-64 py-2">
+	<p class="text-2xl text-center py-6">Dersler</p>
+	{% for okuwcy in okuwcydata %}
+		{% for ders in dersler %}
+			{% if okuwcy.okuwcy_synp == ders.ders_synp %}
+					<div class="w-full flex items-center">
+						<div class="md:w-2/3 w-full mx-auto flex flex-wrap">
+							<div class="md:w-auto  cursor-pointer hover:bg-gray-200 transition duration-300 w-full bg-white rounded-xl mx-2 my-1 flex items-center justify-center text-lg">
+								<a class="px-4 py-2" href="{% url 'books_videos:kitaplar_videolar' ders.id %}">{{ ders.ders_name }}</a>
+							</div>
+						</div>
+					</div>
+			{% endif %}			
+		{% empty %}
+			<p>Ders yok</p>
+		{% endfor %}
+	{% endfor %}
+</div>
+
+
+<div class="w-full bg-violet-50">
+	<div class="w-full border-b border-black container mx-auto py-6 px-5 md:px-0">
+		<p class="text-2xl py-6 hover:text-gray-300"><a href="{% url 'gyzykly:habarlar' %}">Habarlar</a></p>
+		<div class="w-full flex items-center pb-4">
+			<div class="w-full grid md:grid-cols-2 gap-7">
+				{% for habar in habarlar %}
+					<a href="{% url 'gyzykly:habar' habar.id %}">
+						<div class="flex sm:flex-row flex-col md:max-w-full rounded-lg bg-white shadow-lg z-10">
+							
+								<img class="w-full lg:w-52 md:h-auto lg:h-52 sm:h-64 h-40 object-cover sm:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
+									src="{{ habar.habar_image.url }}" alt="" />
+								<div class="lg:p-6 md:p-3 p-2 flex flex-col justify-start">
+									<h5 class="text-gray-900 text-xl font-medium mb-2">{{ habar.habar_name }}</h5>
+									<p class="text-gray-700 text-base mb-4">{{ habar.habar_text|truncatechars_html:25 }}</p>
+									<p class="text-gray-600 text-xs">{{ habar.date_added }}</p>
+								</div>
+							
+						
+						</div>
+					</a>
+				{% empty %}
+					<p>Habar yok</p>
+				{% endfor %}
+				
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="bg-violet-50">
+	<div class="w-full border-b border-black container mx-auto py-6 px-5 md:px-0">
+		<p class="text-2xl py-6 hover:text-gray-400 w-fit transition duration-300"><a href="{% url 'gyzykly:gyzykly_kitaplar' %}"> Gyzykly kitaplar</a></p>
+			<div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 md:gap-5 gap-2">
+				{% for gyzykly_kitap in gyzykly_kitaplar %}
+					<div class="w-full">
+						<a target="_blank" href="{{ gyzykly_kitap.gyzykly_kitap.url }}" class="text-sm text-gray-400">
+							<img class="w-full h-72" src="{% static 'img/pdf.png' %}">
+							<div class="flex justify-between mt-1 px-2">
+								<p class="py-1 text-sm">{{ gyzykly_kitap.gyzykly_kitap_name }}</p>
+								<p class="py-1 text-sm">{{ gyzykly_kitap.date_added }}</p>
+							</div>
+						</a>
+					</div>
+				{% empty %}
+					<p>Kitap yok</p>
+				{% endfor %}
+			</div>
+	</div>
+</div>
+
+<div class="bg-violet-50">
+	<div class="w-full container border-b border-black mx-auto py-6 px-5 md:px-0">
+		<p class="text-2xl py-6 w-fit hover:text-gray-400 transition duration-300"><a href="{% url 'gyzykly:gyzykly_videolar' %}"> Gyzykly wideolar</a></p>
+		<div class="grid lg:grid-cols-3 sm:grid-cols-2 md:gap-5 gap-2">
+			{% for gyzykly_video in gyzykly_videolar %}
+				<div>
+					<video class="w-full" controls>
+						<source src="{{ gyzykly_video.gyzykly_video.url }}"
+							type="video/mp4">
+						<source src="movie.ogg" type="video/ogg">					
+					</video>
+					<div class="flex justify-between px-2 mt-1">
+						<p>{{ gyzykly_video.gyzykly_video_name }}</p>
+						<p>{{ gyzykly_video.date_added }}</p>
+					</div>
+				</div>
+			{% empty %}
+				<p>Video yok</p>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+<div class="w-full bg-violet-50 pt-5 pb-10 md:px-0 px-3 py-2">
+	<div class="container mx-auto">
+		<p class="text-2xl py-6 w-fit hover:text-gray-400 transition duration-300"><a href="{% url 'chat:sorag_jogap' %}">Sorag-Jogap</a></p>
+		<div class="grid md:grid-cols-2 md:gap-5 gap-2">
+			{% for okuwcy in okuwcydata %}
+				{% for sorag in soraglar %}
+					{% if okuwcy.okuwcy_etrap == sorag.owner.okuwcy_etrap and okuwcy.okuwcy_mekdep == sorag.owner.okuwcy_mekdep and okuwcy.okuwcy_synp == sorag.owner.okuwcy_synp %}
+						<div class="w-full flex flex-col justify-between lg:h-36 h-auto bg-white rounded-md p-3">
+							<div class="border-b flex justify-between items-center">
+								<p class="md:text-lg text-md">{{ sorag.owner.okuwcy_ady }} {{ sorag.owner.okuwcy_familya }}</p>
+									<p class="text-gray-500 md:text-sm text-xs">{{ sorag.date_added }}</p>
+							</div>
+							<p class="pt-1">{{ sorag.sorag }}</p>
+						</div>
+					{% endif %}
+					{% empty %}
+						<p>Sorag jogap yok</p>
+				{% endfor %}
+			{% endfor %}
+		</div>
+	</div>
+</div>
+{% endblock content %}

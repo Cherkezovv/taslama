@@ -1,0 +1,54 @@
+{% extends 'books_videos/base.html' %}
+
+{% block title %}Şahsy Otag{% endblock title %}
+
+{% block content %}
+{% for okuwcy in okuwcydata %}
+	<div class="w-full md:mt-20 mt-14 md:w-1/3 md:mx-auto shadow-2xl">
+        <div class="bg-white shadow-sm rounded-sm mx-4">
+            <div class="flex items-center justify-center space-x-2 pt-4 font-semibold text-gray-900 leading-8">
+                <span clas="text-green-500">
+                    <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                </span>
+                <span class="tracking-wide">About</span>
+            </div>
+            <div class="text-gray-700">
+                <div class="text-sm p-6">
+                	<div class="flex pt-3 justify-between items-center border-b md:px-4 px-5 h-10">
+                        <div class="md:w-1/2 md:px-4 py-2 text-lg font-semibold">Gysga adynyz</div>
+                        <div class="md:w-1/2 md:px-4 py-2">{{ user.username }}</div>
+                    </div>
+                    <div class="flex pt-3 justify-between items-center border-b md:px-4 px-5 h-10">
+                        <div class="md:w-1/2 md:px-4 text-lg font-semibold">Ady</div>
+                        <div class="md:w-1/2 md:px-4">{{ okuwcy.okuwcy_ady }}</div>
+                    </div>
+                    <div class="flex pt-3 justify-between items-center border-b md:px-4 px-5 h-10">
+                        <div class="md:w-1/2 md:px-4 text-lg font-semibold">Familiýasy</div>
+                        <div class="md:w-1/2 md:px-4">{{ okuwcy.okuwcy_familya }}</div>
+                    </div>
+                    <div class="flex pt-3 justify-between items-center border-b md:px-4 px-5 h-10">
+                        <div class="md:w-1/2 md:px-4 text-lg font-semibold">Telefon №</div>
+                        <div class="md:w-1/2 md:px-4">{{ okuwcy.okuwcy_phone }}</div>
+                    </div>
+                    <div class="flex pt-3 justify-between items-center border-b md:px-4 px-5 h-10">
+                        <div class="md:w-1/2 md:px-4 text-lg font-semibold">Welayaty</div>
+                        <div class="md:w-1/2 md:px-4">{{ okuwcy.okuwcy_welayat }}</div>
+                    </div>
+                    <div class="flex pt-3 justify-between items-center border-b md:px-4 px-5 h-10">
+                        <div class="md:w-1/2 md:px-4 text-lg font-semibold">Etraby</div>
+                        <div class="md:w-1/2 md:px-4">{{ okuwcy.okuwcy_etrap }}</div>
+                    </div>
+                    <div class="flex pt-3 justify-between items-center border-b md:px-4 px-5 h-10">
+                        <div class="md:w-1/2 md:px-4 text-lg font-semibold">Synpy</div>
+                        <div class="md:w-1/2 md:px-4">{{ okuwcy.okuwcy_synp }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% endblock content %}

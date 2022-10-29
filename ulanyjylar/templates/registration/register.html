@@ -1,0 +1,95 @@
+{% extends 'books_videos/base.html' %}
+{% load static %}
+{% block title %}Agza bolmak{% endblock title %}
+
+{% block content %}
+<div class="w-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" style="
+        background: linear-gradient(to bottom, #3498db, #2c3e50)">
+	<form class="max-w-2xl w-full bg-white" method="post" action="{% url 'ulanyjylar:register' %}">
+        {% csrf_token %}
+	        <div class="max-w-2xl w-full bg-white p-5 space-y-6">
+	            <div>
+	            	<img class="mx-auto h-12 w-auto" src="{% static 'img/workflow-mark.svg' %}" alt="Workflow" />
+	                <h2 class="mt-6 text-center text-3xl tracking-tight font-bold text-indigo-600">AGZA BOLMAK</h2>
+	            </div>
+	            <div class="mt-8 space-y-3">
+	                <div class="grid grid-cols-2 md:gap-7 gap-2">
+	                    <div class="rounded-md shadow-sm">
+	                        <div class='mb-2'>
+	                            <input type="text" name='okuwcy_ady' required
+	                                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+	                                placeholder="Ady" />
+	                        </div>
+	                        <div class='mb-2'>
+	                            <input type="text" name='okuwcy_welayat' required
+	                                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+	                                placeholder="Welaýaty" />
+	                        </div>
+	                        <div class='mb-2'>
+	                            <input type="number" name='okuwcy_mekdep' required
+	                                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+	                                placeholder="Mekdep №"/>
+	                        </div>
+	                        <div class='mb-2'>
+	                            <input type="password" name='password1' required
+	                                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+	                                placeholder="password (8 belgiden az bolmaly dal)" />
+	                        </div>
+	                        <div>
+						        <input type="text" name='username' required
+						            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+						            placeholder="Gysga adynyz" />
+						    </div>
+	                    </div>
+	                    <div class="rounded-md shadow-sm">
+	                        <div class='mb-2'>
+	                            <input type="text" name='okuwcy_familya' required
+	                                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+	                                placeholder="Familiýasy" />
+	                        </div>
+	                        <div class='mb-2'>
+	                            <input type="text" name='okuwcy_etrap' required
+	                                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+	                                placeholder="Etraby" />
+	                        </div>
+	                        <div class='mb-2'>
+	                            <input type="number" name='okuwcy_synp' required
+	                                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+	                                placeholder="Synpy" />
+	                        </div>
+	                        <div class="mb-2">
+	                            <input type="password" name='password2' required
+	                                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+	                                placeholder="passwordy gaytala" />
+	                        </div>
+	                        <div>
+	                            <input type="text" name='okuwcy_phone' required
+	                                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+	                                placeholder="Tel №" />
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="flex items-center justify-center mt-2">
+	                    <p class="text-gray-500 text-sm mr-2">Eger on agza bolsanyz:</p>
+	                    <a class="hover:text-blue-500 border-b border-black" href="{% url 'ulanyjylar:login' %}">Iceri gir</a>
+	                </div>
+	                <div class=''>
+	                    <button name="submit" 
+	                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+	                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+	                            <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+	                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+	                                aria-hidden="true">
+	                                <path fill-rule="evenodd"
+	                                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" />
+	                            </svg>
+	                        </span>
+	                        AGZA BOLMAK
+	                    </button>
+	                </div>
+	            </div>
+	        </div>
+		<input type="hidden" name="next" value="{% url 'books_videos:index' %}">
+    </form>
+</div>
+{% endblock content %}

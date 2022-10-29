@@ -1,0 +1,36 @@
+{% extends 'books_videos/base.html' %}
+{% load static %}
+
+{% block title %}Gyzykly kitaplar{% endblock title %}
+
+{% block content %}
+	<div class="bg-violet-50 md:pb-96 pb-[800px]">
+		<div class="w-full container mx-auto py-6 px-5 md:px-0">
+			<p class="text-2xl py-6"> Gyzykly kitaplar</p>
+				<div class="grid lg:grid-cols-3 sm:grid-cols-2 md:gap-5 gap-2">
+					{% for gyzykly_kitap in gyzykly_kitaplar %}
+						<div class="w-full">
+							<a target="_blank" href="{{ gyzykly_kitap.gyzykly_kitap.url }}" class="text-sm text-gray-400">
+								<img src="{% static 'img/pdf.png' %}" class="w-full md:h-64 h-48"/>
+								<div class="flex items-center md:px-2 justify-between py-1">
+									<p class="text-lg text-black">{{ gyzykly_kitap.gyzykly_kitap_name }}</p>
+									<p class="text-xs text-black">{{ gyzykly_kitap.date_added }}</p>
+								</div>
+							</a>
+						</div>
+					{% empty %}
+						<p>Kitap yok</p>
+					{% endfor %}
+				</div>
+				<div class="md:mt-4 mt-2 w-fit flex justify-center">
+					{% if gyzykly_kitaplar.has_previous %}
+						<a class="bg-green-500 hover:bg-gray-300 rounded-l-md text-white border-r-2 px-2 py-2" href="?page={{ habarlar.previous_page_number }}">yza</a>
+					{% endif %}
+						<a class="bg-green-500 text-white px-2 py-2">{{ gyzykly_kitaplar }}</a>
+					{% if gyzykly_kitaplar.has_next %}
+						<a class="bg-green-500 hover:bg-gray-300 text-white rounded-r-md border-l-2 px-2 py-2" href="?page={{ habarlar.next_page_number }}">one</a>
+					{% endif %}
+				</div>
+		</div>
+	</div>
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% extends 'books_videos/base.html' %}
+
+{% block title %}Habarlar{% endblock title %}
+
+{% block content %}
+	<div class="bg-violet-50 w-full h-auto md:pb-96 pb-[800px] relative">
+		<div class="w-full container mx-auto py-6 px-5 md:px-0 relative">
+			<p class="text-2xl py-6"><a href="{% url 'gyzykly:habarlar' %}">Habarlar</a></p>
+			<div class="w-full flex items-center pb-4">
+				<div class="w-full grid md:grid-cols-2 gap-7">
+					{% for habar in habarlar %}
+						<a href="{% url 'gyzykly:habar' habar.id %}">
+							<div class="flex sm:flex-row flex-col md:max-w-full rounded-lg bg-white hover:shadow-none transitin duration-200 shadow-lg z-10">
+								
+									<img class="w-full lg:w-52 md:h-auto lg:h-52 sm:h-64 h-40 object-cover sm:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
+										src="{{ habar.habar_image.url }}" alt="" />
+									<div class="lg:p-6 md:p-3 p-2 flex flex-col justify-start">
+										<h5 class="text-gray-900 text-xl font-medium mb-2">{{ habar.habar_name }}</h5>
+										<p class="text-gray-700 text-base mb-4">{{ habar.habar_text|truncatechars_html:25 }}</p>
+										<p class="text-gray-600 text-xs">{{ habar.date_added }}</p>
+									</div>
+								
+							
+							</div>
+						</a>
+					{% empty %}
+						<p>Habar yok</p>
+					{% endfor %}
+					
+				</div>
+			</div>
+		<div class="w-fit flex justify-center">
+			{% if habarlar.has_previous %}
+				<a class="bg-green-500 hover:bg-gray-300 rounded-l-md text-white border-r-2 px-2 py-2" href="?page={{ habarlar.previous_page_number }}">yza</a>
+			{% endif %}
+				<a class="bg-green-500 text-white px-2 py-2">{{ habarlar }}</a>
+			{% if habarlar.has_next %}
+				<a class="bg-green-500 hover:bg-gray-300 text-white rounded-r-md border-l-2 px-2 py-2" href="?page={{ habarlar.next_page_number }}">one</a>
+			{% endif %}
+		</div>
+		</div>
+	</div>
+
+{% endblock content %}
